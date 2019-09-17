@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<enemies>
+	<enemy name="Skeleton"> Skeleton
+		<health> 10 </health>
+		<damage> 3 </damage>
+		<defense> 5 </defense>
+		<rof> 1 </rof>
+		<experience> 10 </experience>
+		<weapons></weapons>
+	</enemy>
+</enemies>
+	
