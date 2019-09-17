@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<enemies>
+
+	<enemy name="Skeleton">
+		<health> 10 </health>
+		<damage> 3 </damage>
+		<defense> 5 </defense>
+		<rof> 1 </rof>
+		<experience> 10 </experience>
+		<weapon name="Rusted Sword">
+			<type> Sword </type>
+			<reach> 1 </reach>
+		</weapon>
+	</enemy>
+	
+	<enemy name="Goblin">
+		<health> 7 </health>
+		<damage> 5 </damage>
+		<defense> 3 </defense>
+		<rof> 2 </rof>
+		<experience> 6 </experience>
+		<weapon name="Dagger">
+			<type> Dagger </type>
+			<reach> 1 </reach>
+		</weapon>
+		<weapon name="Bow">
+			<type> Bow </type>
+			<reach> 4 </reach>
+		</weapon>
+	</enemy>
+	
+	<enemy name="Bandit">
+		<health> 15 </health>
+		<damage> 4 </damage>
+		<defense> 7 </defense>
+		<rof> 2 </rof>
+		<experience> 15 </experience>
+		<weapon name="Sword">
+			<type> Sword </type>
+			<reach> 1 </reach>
+		</weapon>
+		<weapon name="Spear">
+			<type> Spear </type>
+			<reach> 2 </reach>
+		</weapon>
+	</enemy>
+	
+	<enemy name="Bandit Boss">
+		<health> 30 </health>
+		<damage> 5 </damage>
+		<defense> 7 </defense>
+		<rof> 2 </rof>
+		<experience> 15 </experience>
+		<weapon name="Club">
+			<type> Blunt </type>
+			<reach> 1 </reach>
+		</weapon>
+		<weapon name="Zweihander">
+			<type> Sword </type>
+			<reach> 2 </reach>
+		</weapon>
+	</enemy>
+	
+</enemies>
+	

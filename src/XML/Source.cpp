@@ -12,7 +12,7 @@ int main() {
 	//Codi doc practica
 
 	rapidxml::xml_document<> doc;
-	std::ifstream file(".. / .. /res/files/doc.xml");
+	std::ifstream file(".. / .. /res/files/config.xml");
 	std::stringstream buffer;
 	buffer << file.rdbuf();
 	file.close();
