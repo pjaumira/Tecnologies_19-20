@@ -1,5 +1,6 @@
 //includes generics
 #include "iostream"
+#include <list>
 
 //includes xml
 #include "../../dep/inc/XML/rapidxml.hpp"
@@ -19,6 +20,5 @@ int main() {
 	std::string content(buffer.str());
 	doc.parse<0>(&content[0]);
 
-	std::cout << "Nombre de la raiz" << doc.first_node()->name() << "\n";
-	std::cout << "Value" << doc.first_node()->value() << "\n";
+	std::list <char> EnemyList;
 }
