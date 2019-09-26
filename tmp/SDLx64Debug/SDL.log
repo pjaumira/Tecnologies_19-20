@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\pjaumira\documents\github\tecnologies_19-20\src\sdl\source.cpp(49): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+  SDL.vcxproj -> C:\Users\pjaumira\Documents\GitHub\Tecnologies_19-20\\bin\x64Debug\SDL.exe
+  0 File(s) copied
