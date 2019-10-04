@@ -11,6 +11,11 @@
 
 bool hover = false;
 
+Vec2 mouse;
+Vec2 mouse_click;
+
+
+
 int main(int, char*[])
 {
 	// --- INIT SDL ---
@@ -51,9 +56,6 @@ int main(int, char*[])
 	if (playerTexture == nullptr) throw "No s'ha pogut crear la textura";
 	SDL_Rect playerRect{ 0, 0, 100, 70 };
 
-	Vec2 mouse;
-
-
 	//-->Animated Sprite ---
 
 
@@ -68,17 +70,21 @@ int main(int, char*[])
 
 	//Crear Text_1 Play
 	SDL_Texture *textTexture1 { SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
-	SDL_Rect textRect1{ 100,50, tmpSurf->w, tmpSurf->h };
+	SDL_Rect textRect1{ 350,100, tmpSurf->w, tmpSurf->h };
 
 	//Crear TextHover Play
-	tmpSurf { TTF_RenderText_Blended(font, "Play",SDL_Color{0,0,0,255}) };
+	tmpSurf = { TTF_RenderText_Blended(font, "Play",SDL_Color{0,100,255,255}) };
 	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 
 	//Crear Text_2 Sound
-	
+	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{255,150,0,255}) };
+	SDL_Texture *textTexture3{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	SDL_Rect textRect2{ 225,200, tmpSurf->w, tmpSurf->h };
 
 	//Crear Text_3 Exit
-
+	tmpSurf = { TTF_RenderText_Blended(font, "Quit",SDL_Color{255,150,0,255}) };
+	SDL_Texture *textTexture4{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	SDL_Rect textRect3{ 340,300, tmpSurf->w, tmpSurf->h };
 
 	// Netejar
 	SDL_FreeSurface(tmpSurf);
@@ -112,6 +118,10 @@ int main(int, char*[])
 				mouse.x = event.motion.x;
 				mouse.y = event.motion.y;
 				break;
+			case SDL_MOUSEBUTTONDOWN: 
+				mouse_click.x = event.motion.x;
+				mouse_click.y = event.motion.y;
+				break;
 			default:;
 			}
 		}
@@ -119,6 +129,31 @@ int main(int, char*[])
 		// UPDATE
 		playerRect.x += (mouse.x - playerRect.x - playerRect.w/2) / 10;
 		playerRect.y += (mouse.y - playerRect.y - playerRect.h/2) / 10;
+
+		//sortir
+		if (collision(mouse_click, textRect3)) {
+			isRunning = false;
+		}
+
+		//play/pause
+		if (collision(mouse_click, textRect2)) {
+			if (Mix_PausedMusic() == 1 )
+			{
+				Mix_ResumeMusic();
+			}
+			else
+			{
+				Mix_PauseMusic();
+			}
+		}
+
+		//Hover
+		if (collision(mouse, textRect1)) {
+			bool hover = true;
+		}
+		else {
+			false;
+		}
 
 		// DRAW
 
@@ -129,7 +164,14 @@ int main(int, char*[])
 		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
 
 		//Fonts
-		SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
+		if (hover) {
+			SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect1);
+		}
+		else {
+			SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
+		};
+		SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect2);
+		SDL_RenderCopy(m_renderer, textTexture4, nullptr, &textRect3);
 		
 		//Mouse
 		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
@@ -141,12 +183,15 @@ int main(int, char*[])
 
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(textTexture1);
+	SDL_DestroyTexture(textTexture2);
+	SDL_DestroyTexture(textTexture3);
+	SDL_DestroyTexture(textTexture4);
 	SDL_DestroyTexture(playerTexture);
-	IMG_Quit();
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
 
 	// --- QUIT ---
+	IMG_Quit();
 	Mix_CloseAudio();
 	Mix_Quit();
 	TTF_Quit();
