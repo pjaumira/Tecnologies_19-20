@@ -9,12 +9,8 @@
 
 #include "Types.h"
 
-bool hover = false;
-
 Vec2 mouse;
 Vec2 mouse_click;
-
-
 
 int main(int, char*[])
 {
@@ -45,7 +41,6 @@ int main(int, char*[])
 
 	// --- SPRITES ---
 
-
 		//Background
 	SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg") };
 	if (bgTexture == nullptr) throw "Error: bgTexture init";
@@ -58,8 +53,8 @@ int main(int, char*[])
 
 	//-->Animated Sprite ---
 
-
 	// --- TEXT ---
+
 	//Cargar font
 	TTF_Font *font{ TTF_OpenFont("../../res/ttf/saiyan.ttf",80) };
 	if (font == nullptr) throw "No es pot inicialitzar the TTF_Font";
@@ -75,6 +70,10 @@ int main(int, char*[])
 	//Crear TextHover Play
 	tmpSurf = { TTF_RenderText_Blended(font, "Play",SDL_Color{0,100,255,255}) };
 	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+
+	//Crear Text_1 Play No Hover
+	tmpSurf = { TTF_RenderText_Blended(font, "Play",SDL_Color{255,150,0,255}) };
+	SDL_Texture *textTexture1NH{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 
 	//Crear Text_2 Sound
 	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{255,150,0,255}) };
@@ -127,6 +126,8 @@ int main(int, char*[])
 		}
 
 		// UPDATE
+
+
 		playerRect.x += (mouse.x - playerRect.x - playerRect.w/2) / 10;
 		playerRect.y += (mouse.y - playerRect.y - playerRect.h/2) / 10;
 
@@ -137,23 +138,22 @@ int main(int, char*[])
 
 		//play/pause
 		if (collision(mouse_click, textRect2)) {
-			if (Mix_PausedMusic() == 1 )
-			{
+			if (Mix_PausedMusic()){
 				Mix_ResumeMusic();
 			}
-			else
-			{
+			else{
 				Mix_PauseMusic();
 			}
 		}
 
 		//Hover
 		if (collision(mouse, textRect1)) {
-			bool hover = true;
+			textTexture1 = textTexture2;
 		}
 		else {
-			false;
-		}
+			textTexture1 = textTexture1NH;
+		};
+
 
 		// DRAW
 
@@ -164,17 +164,13 @@ int main(int, char*[])
 		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
 
 		//Fonts
-		if (hover) {
-			SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect1);
-		}
-		else {
-			SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
-		};
+		SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
 		SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect2);
 		SDL_RenderCopy(m_renderer, textTexture4, nullptr, &textRect3);
 		
 		//Mouse
 		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
+
 
 		SDL_RenderPresent(m_renderer);
 	}
