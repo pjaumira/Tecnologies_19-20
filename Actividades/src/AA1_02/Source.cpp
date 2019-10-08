@@ -10,7 +10,6 @@
 #include "Types.h"
 
 Vec2 mouse;
-Vec2 mouse_click;
 
 int main(int, char*[])
 {
@@ -67,22 +66,30 @@ int main(int, char*[])
 	SDL_Texture *textTexture1 { SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 	SDL_Rect textRect1{ 350,100, tmpSurf->w, tmpSurf->h };
 
-	//Crear TextHover Play
+	//Crear Text Hover Play
 	tmpSurf = { TTF_RenderText_Blended(font, "Play",SDL_Color{0,100,255,255}) };
-	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	SDL_Texture *textTextureH{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 
-	//Crear Text_1 Play No Hover
+	//Crear Text No Hover Play
 	tmpSurf = { TTF_RenderText_Blended(font, "Play",SDL_Color{255,150,0,255}) };
-	SDL_Texture *textTexture1NH{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	SDL_Texture *textTextureNH{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 
-	//Crear Text_2 Sound
-	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{255,150,0,255}) };
-	SDL_Texture *textTexture3{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	//Crear Text Sound
+	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{0,250,50,255}) };
+	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 	SDL_Rect textRect2{ 225,200, tmpSurf->w, tmpSurf->h };
 
-	//Crear Text_3 Exit
+	// Crear Text Click Sound
+	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{0,250,50,255}) };
+	SDL_Texture *textTextureC{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+
+	// Crear Text No  Sound Click
+	tmpSurf = { TTF_RenderText_Blended(font, "Sound Toggle",SDL_Color{255,50,0,255}) };
+	SDL_Texture *textTextureNC{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+
+	//Crear Text Exit
 	tmpSurf = { TTF_RenderText_Blended(font, "Quit",SDL_Color{255,150,0,255}) };
-	SDL_Texture *textTexture4{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
+	SDL_Texture *textTexture3{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 	SDL_Rect textRect3{ 340,300, tmpSurf->w, tmpSurf->h };
 
 	// Netejar
@@ -104,6 +111,10 @@ int main(int, char*[])
 	SDL_Event event;
 	bool isRunning = true;
 	while (isRunning) {
+
+		bool click = false;
+		bool toggle = false;
+
 		// HANDLE EVENTS
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
@@ -118,8 +129,7 @@ int main(int, char*[])
 				mouse.y = event.motion.y;
 				break;
 			case SDL_MOUSEBUTTONDOWN: 
-				mouse_click.x = event.motion.x;
-				mouse_click.y = event.motion.y;
+				click = true;
 				break;
 			default:;
 			}
@@ -127,33 +137,33 @@ int main(int, char*[])
 
 		// UPDATE
 
-
 		playerRect.x += (mouse.x - playerRect.x - playerRect.w/2) / 10;
 		playerRect.y += (mouse.y - playerRect.y - playerRect.h/2) / 10;
 
-		//sortir
-		if (collision(mouse_click, textRect3)) {
+		// Exit Button
+		if (click && collision(mouse, textRect3)) {
 			isRunning = false;
 		}
 
-		//play/pause
-		if (collision(mouse_click, textRect2)) {
+		// Play/Pause Music
+		if (click && collision(mouse, textRect2)) {
 			if (Mix_PausedMusic()){
 				Mix_ResumeMusic();
+				textTexture2 = textTextureC;
 			}
 			else{
 				Mix_PauseMusic();
+				textTexture2 = textTextureNC;
 			}
 		}
 
-		//Hover
+		// Hover Trigger
 		if (collision(mouse, textRect1)) {
-			textTexture1 = textTexture2;
+			textTexture1 = textTextureH;
 		}
 		else {
-			textTexture1 = textTexture1NH;
+			textTexture1 = textTextureNH;
 		};
-
 
 		// DRAW
 
@@ -165,12 +175,11 @@ int main(int, char*[])
 
 		//Fonts
 		SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
-		SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect2);
-		SDL_RenderCopy(m_renderer, textTexture4, nullptr, &textRect3);
+		SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect2);
+		SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect3);
 		
 		//Mouse
 		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
-
 
 		SDL_RenderPresent(m_renderer);
 	}
@@ -181,7 +190,8 @@ int main(int, char*[])
 	SDL_DestroyTexture(textTexture1);
 	SDL_DestroyTexture(textTexture2);
 	SDL_DestroyTexture(textTexture3);
-	SDL_DestroyTexture(textTexture4);
+	SDL_DestroyTexture(textTextureH);
+	SDL_DestroyTexture(textTextureNH);
 	SDL_DestroyTexture(playerTexture);
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
