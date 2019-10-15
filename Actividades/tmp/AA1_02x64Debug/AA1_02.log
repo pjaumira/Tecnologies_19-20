@@ -1,27 +1,32 @@
 ﻿  Source.cpp
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(18): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(18): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(23): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(23): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(28): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(28): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(32): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(32): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(35): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(35): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(39): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(39): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(45): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(45): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(50): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(50): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(59): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(59): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(63): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(63): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(102): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(102): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(105): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(105): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\types.h(4): warning C4005: 'CLOCKS_PER_SEC': macro redefinition
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(49): note: see previous definition of 'CLOCKS_PER_SEC'
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\types.h(6): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(213): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(19): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(19): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(24): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(24): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(29): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(29): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(33): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(33): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(36): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(36): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(40): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(40): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(46): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(46): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(51): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(51): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(87): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(87): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(91): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(91): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(135): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(135): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(138): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(138): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\alumno\documents\github\tecnologies_19-20\actividades\src\aa1_02\source.cpp(52): warning C4101: 'goldRect': unreferenced local variable
   AA1_02.vcxproj -> C:\Users\alumno\Documents\GitHub\Tecnologies_19-20\Actividades\\bin\x64Debug\AA1_02.exe
   0 File(s) copied

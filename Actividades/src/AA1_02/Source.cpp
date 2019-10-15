@@ -6,6 +6,7 @@
 #include <exception>
 #include <iostream>
 #include <string>
+#include <time.h>
 
 #include "Types.h"
 
@@ -40,17 +41,44 @@ int main(int, char*[])
 
 	// --- SPRITES ---
 
-		//Background
-	SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg") };
+	//Background
+	SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bgCastle.jpg") };
 	if (bgTexture == nullptr) throw "Error: bgTexture init";
 	SDL_Rect bgRect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
-		//Mouse
-	SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer, "../../res/img/kintoun.png") };
+	//Sac Monedes
+	SDL_Texture* goldTexture{ IMG_LoadTexture(m_renderer, "../../res/img/gold.png") };
+	if (goldTexture == nullptr) throw "Error : bagTexture init";
+	SDL_Rect goldRect;
+
+	//Mouse
+	/*SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer, "../../res/img/kintoun.png") };
 	if (playerTexture == nullptr) throw "No s'ha pogut crear la textura";
-	SDL_Rect playerRect{ 0, 0, 100, 70 };
+	SDL_Rect playerRect{ 0, 0, 100, 70 }; */
 
 	//-->Animated Sprite ---
+
+	// Players
+	//Player 1
+	SDL_Texture *player1Texture{ IMG_LoadTexture(m_renderer, "../../res/img/sp01.png") };
+	SDL_Rect player1Rect, player1Position;
+
+	int textWidth, textHeight, frameWidth, frameHeight;
+
+	SDL_QueryTexture(player1Texture, NULL, NULL, &textWidth, &textHeight); //retorna la mida de la textura
+
+	frameWidth = textWidth / 6;
+	frameHeight = textHeight / 1;
+
+	player1Position.x = player1Position.y = 0;
+	player1Rect.x = player1Rect.y = 0;
+	player1Position.h = player1Rect.h = frameHeight;
+	player1Position.w = player1Rect.w = frameWidth;
+
+	//Player 2
+
+	// Time
+
 
 	// --- TEXT ---
 
@@ -62,6 +90,7 @@ int main(int, char*[])
 	SDL_Surface *tmpSurf {TTF_RenderText_Blended(font, "Play",SDL_Color{255,150,0,255})};
 	if (tmpSurf == nullptr) throw "Unable to create the SDL text surface";
 
+	/*
 	//Crear Text_1 Play
 	SDL_Texture *textTexture1 { SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
 	SDL_Rect textRect1{ 350,100, tmpSurf->w, tmpSurf->h };
@@ -90,7 +119,11 @@ int main(int, char*[])
 	//Crear Text Exit
 	tmpSurf = { TTF_RenderText_Blended(font, "Quit",SDL_Color{255,150,0,255}) };
 	SDL_Texture *textTexture3{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf) };
-	SDL_Rect textRect3{ 340,300, tmpSurf->w, tmpSurf->h };
+	SDL_Rect textRect3{ 340,300, tmpSurf->w, tmpSurf->h }; */
+
+	//Text Score
+
+	//Text Time
 
 	// Netejar
 	SDL_FreeSurface(tmpSurf);
@@ -106,6 +139,14 @@ int main(int, char*[])
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 	Mix_PlayMusic(soundtrack, -1);
 
+	//------TIME-------
+
+	Uint32 frameStart, frameTime;
+
+	clock_t lastTime = clock();
+	float timeDown = 10;
+	float deltaTime = 0;
+
 	// --- GAME LOOP ---
 
 	SDL_Event event;
@@ -114,6 +155,7 @@ int main(int, char*[])
 
 		bool click = false;
 		bool toggle = false;
+		frameStart = SDL_GetTicks();
 
 		// HANDLE EVENTS
 		while (SDL_PollEvent(&event)) {
@@ -137,14 +179,15 @@ int main(int, char*[])
 
 		// UPDATE
 
-		playerRect.x += (mouse.x - playerRect.x - playerRect.w/2) / 10;
-		playerRect.y += (mouse.y - playerRect.y - playerRect.h/2) / 10;
+		//playerRect.x += (mouse.x - playerRect.x - playerRect.w/2) / 10;
+		//playerRect.y += (mouse.y - playerRect.y - playerRect.h/2) / 10;
 
 		// Exit Button
-		if (click && collision(mouse, textRect3)) {
+		/* if (click && collision(mouse, textRect3)) {
 			isRunning = false;
-		}
+		}*/
 
+		/*
 		// Play/Pause Music
 		if (click && collision(mouse, textRect2)) {
 			if (Mix_PausedMusic()){
@@ -165,21 +208,52 @@ int main(int, char*[])
 			textTexture1 = textTextureNH;
 		};
 
+		*/
+
+		deltaTime = (clock() - lastTime);
+		lastTime = clock();
+		deltaTime /= CLOCKS_PER_SEC;
+		timeDown -= deltaTime; //uodate timer
+		std::cout << timeDown << std::endl;
+		frameTime = SDL_GetTicks() - frameStart;
+		if (frameTime < DELAY_TIME) {
+			SDL_Delay((int)(DELAY_TIME - frameTime));
+		}
+
+		frameTime++;
+
+		if (FPS / frameTime <= 9) {
+			frameTime = 0;
+			player1Rect.x += frameWidth;
+			if (player1Rect.x >= textWidth) {
+				player1Rect.x = 0;
+			}
+		};
+
 		// DRAW
 
 		SDL_RenderClear(m_renderer);
 
 		//Background
-
 		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
 
 		//Fonts
-		SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
-		SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect2);
-		SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect3);
+		//SDL_RenderCopy(m_renderer, textTexture1, nullptr, &textRect1);
+		//SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect2);
+		//SDL_RenderCopy(m_renderer, textTexture3, nullptr, &textRect3);
+
+		//Players
+		//AnimatedSprite
+		SDL_RenderCopy (m_renderer, player1Texture, &player1Rect, &player1Position);
+
+		//Gold
+
+		//Timer
+
+		//Score
 		
 		//Mouse
-		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
+		//SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
 
 		SDL_RenderPresent(m_renderer);
 	}
@@ -187,12 +261,12 @@ int main(int, char*[])
 	// --- DESTROY ---
 
 	SDL_DestroyTexture(bgTexture);
-	SDL_DestroyTexture(textTexture1);
-	SDL_DestroyTexture(textTexture2);
-	SDL_DestroyTexture(textTexture3);
-	SDL_DestroyTexture(textTextureH);
-	SDL_DestroyTexture(textTextureNH);
-	SDL_DestroyTexture(playerTexture);
+	//SDL_DestroyTexture(textTexture1);
+	//SDL_DestroyTexture(textTexture2);
+	//SDL_DestroyTexture(textTexture3);
+	//SDL_DestroyTexture(textTextureH);
+	//SDL_DestroyTexture(textTextureNH);
+	//SDL_DestroyTexture(playerTexture);
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
 
